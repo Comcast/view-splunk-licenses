@@ -6,6 +6,7 @@ A CLI Script to show pretty-printed Splunk License Data.
 This servers as a wrapper for `splunk list licenses`, but adds a few enchancements:
 
 - Bytes are converted into MB and GB
+- Total quota bytes are displayed at the end of the run, in MB/GB format
 - Dates are converted into human-readable formats
 - Color coding is used so expired licenses show up in RED
 - Any license that expires in less than 30 days will show up in YELLOW
@@ -16,6 +17,9 @@ This servers as a wrapper for `splunk list licenses`, but adds a few enchancemen
 - Python
 - A running version of Splunk 6.x or greater
 - Admin access to Splunk
+
+Note This script will attempt to find your Splunk installation--but if it cannot,
+just set SPLUNK_HOME and that will be checked.
 
 
 ## Usage
