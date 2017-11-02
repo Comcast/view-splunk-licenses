@@ -3,6 +3,12 @@
 
 A CLI Script to show pretty-printed Splunk License Data.
 
+This servers as a wrapper for `splunk list licenses`, but adds a few enchancements:
+
+- Bytes are converted into MB and GB
+- Dates are converted into human-readable formats
+- Color coding is used so expired licenses show up in red
+
 
 ## Requirements
 
