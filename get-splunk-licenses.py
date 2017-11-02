@@ -11,6 +11,7 @@ logger = logging
 import socket, errno
 import subprocess
 import os
+import os.path
 import sys
 import time
 
@@ -180,15 +181,39 @@ def printLicenses(data):
 	print("")
 
 
+#
+# Determine the location of our Splunk executable, based on a few popular locations.
+#
+def getSplunkPath():
+
+	locations = [
+		"/opt/splunk/bin/splunk",
+		"/var/splunk/bin/splunk"
+		]
+
+	for file in locations:
+		if os.path.isfile(file):
+			return(file)
+
+	if os.getenv("SPLUNK_HOME"):
+		file = os.getenv("SPLUNK_HOME") + "/bin/splunk"
+		if os.path.isfile(file):
+			return(file)
+
+	raise Exception("Could not find Splunk binary! Try setting the SPLUNK_HOME envioronment variable to point to your Splunk installation.  BTW, I tried these locations: %s" % (locations))
+
+
 def main():
 
-	cmd = "/var/splunk/bin/splunk list licenses"
+	splunk = getSplunkPath()
+
+	cmd = "%s list licenses" % (splunk)
 	logger.info("Running command %s..." % cmd)
 	license_text = runCmd(cmd)
-	#print license_text
+	#print license_text # Debugging
 
 	license_data = parseLicenseText(license_text)
-	#print json.dumps(license_data, indent=4, sort_keys=True)
+	#print json.dumps(license_data, indent=4, sort_keys=True) # Debugging
 	
 	printLicenses(license_data)
 
