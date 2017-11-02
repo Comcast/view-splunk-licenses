@@ -7,7 +7,8 @@ This servers as a wrapper for `splunk list licenses`, but adds a few enchancemen
 
 - Bytes are converted into MB and GB
 - Dates are converted into human-readable formats
-- Color coding is used so expired licenses show up in red
+- Color coding is used so expired licenses show up in RED
+- Any license that expires in less than 30 days will show up in YELLOW
 
 
 ## Requirements
