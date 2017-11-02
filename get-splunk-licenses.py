@@ -5,8 +5,6 @@
 #
 
 import argparse
-import datetime
-#import dateutil.parser
 import json
 import logging
 logger = logging
@@ -25,6 +23,7 @@ import time
 # ANSI color codes.
 #
 color_green = '\033[92m'
+color_yellow = '\033[93m'
 color_red = '\033[91m'
 color_end = '\033[0m'
 
@@ -154,15 +153,27 @@ def printLicenses(data):
 	print("%8s %12s %20s %20s  %s" % ("Status", "Quota", "Creation Date", "Expiration Date", "Label"))
 	print("%8s %12s %20s %20s  %s" % ("========", "==========", "===================", "===================", "============================"))
 
+	now = time.time()
+	month = 86400 * 30
 
 	for row in data:
 		total_bytes += row["quota"]
 
-		color = color_green
-		if row["status"] != "VALID":
-			color = color_red
+		row["status_local"] = row["status"]
 
-		print("%s%8s %12s %20s %20s  %s%s" % (color, row["status"], row["quota_human"], row["creation_time_human"], row["expiration_time_human"], row["label"], color_end))
+		if row["status_local"] == "VALID":
+			time_left = int(row["expiration_time"]) - now
+			if (time_left < month):
+				row["status_local"] = "WARNING"
+
+		color = color_green
+		if row["status_local"] != "VALID":
+			if row["status_local"] == "WARNING":
+				color = color_yellow
+			else:
+				color = color_red
+
+		print("%s%8s %12s %20s %20s  %s%s" % (color, row["status_local"], row["quota_human"], row["creation_time_human"], row["expiration_time_human"], row["label"], color_end))
 
 	print("")
 	print("Total Quota bytes: %s%s%s" % (color_green, getQuotaHuman(total_bytes), color_end))
