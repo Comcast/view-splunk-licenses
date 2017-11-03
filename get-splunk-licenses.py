@@ -90,7 +90,7 @@ def getQuotaHuman(quota):
 		retval = ("%.2f MB" % (quota / mb) )
 
 	else:
-		retval = ("%s b" % (quota))
+		retval = ("%s B" % (quota))
 
 	return(retval)
 
