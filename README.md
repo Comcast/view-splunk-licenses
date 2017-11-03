@@ -10,6 +10,7 @@ This servers as a wrapper for `splunk list licenses`, but adds a few enchancemen
 - Dates are converted into human-readable formats
 - Color coding is used so expired licenses show up in RED
 - Any license that expires in less than 30 days will show up in YELLOW
+- Most importantly, output is 1 line per license instead of 50+ lines per license.
 
 
 ## Requirements
