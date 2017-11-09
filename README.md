@@ -20,7 +20,7 @@ This servers as a wrapper for `splunk list licenses`, but adds a few enchancemen
 - Admin access to Splunk
 
 Note This script will attempt to find your Splunk installation--but if it cannot,
-just set SPLUNK_HOME and that will be checked.
+just set the environment variable SPLUNK_HOME and that will be checked.
 
 
 ## Usage
