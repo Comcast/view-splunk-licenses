@@ -1,7 +1,7 @@
 
 # View Splunk Licenses
 
-A CLI Script to show pretty-printed Splunk License Data.
+A CLI Script to show pretty-printed Splunk License Data in a human-readable format.
 
 This servers as a wrapper for `splunk list licenses`, but adds a few enchancements:
 
