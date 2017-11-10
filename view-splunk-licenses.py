@@ -15,7 +15,7 @@ import os.path
 import sys
 import time
 
-#parser = argparse.ArgumentParser(description = "Check the overall health of Zookeeper Clusters")
+#parser = argparse.ArgumentParser(description = "Display Splunk License Info")
 #parser.add_argument("--debug", help = "Enable debug messages", action = "store_true" )
 
 #args = parser.parse_args()
@@ -125,12 +125,12 @@ def parseLicenseText(text):
 		elif values[0] == "creation_time":
 			row["creation_time"] = values[1]
 			row["creation_time_human"] = time.strftime("%Y-%m-%d %H:%M:%S",
-				time.localtime(int(values[1])))
+				time.gmtime(int(values[1])))
 
 		elif values[0] == "expiration_time":
 			row["expiration_time"] = values[1]
 			row["expiration_time_human"] = time.strftime("%Y-%m-%d %H:%M:%S",
-				time.localtime(int(values[1])))
+				time.gmtime(int(values[1])))
 
 		elif values[0] == "label":
 			row["label"] = values[1]
